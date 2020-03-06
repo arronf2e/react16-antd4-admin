@@ -1,5 +1,5 @@
 import React, {Suspense} from 'react';
-import {routes} from "appSrc/router";
+import {routes} from "./router";
 import {BrowserRouter} from 'react-router-dom';
 import {renderRoutes} from 'react-router-config';
 
