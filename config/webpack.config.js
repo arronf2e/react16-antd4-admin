@@ -24,6 +24,7 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -125,7 +126,6 @@ module.exports = function(webpackEnv) {
     }
     return loaders;
   };
-
   return {
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
@@ -367,7 +367,7 @@ module.exports = function(webpackEnv) {
                 customize: require.resolve(
                   'babel-preset-react-app/webpack-overrides'
                 ),
-                
+
                 plugins: [
                   [
                     require.resolve('babel-plugin-named-asset-import'),
@@ -414,7 +414,7 @@ module.exports = function(webpackEnv) {
                 // code.  Without the options below, debuggers like VSCode
                 // show incorrect code and set breakpoints on the wrong lines.
                 sourceMaps: shouldUseSourceMap,
-                inputSourceMap: shouldUseSourceMap,
+                inputSourceMap: shouldUseSourceMap
               },
             },
             // "postcss" loader applies autoprefixer to our CSS.
@@ -506,6 +506,8 @@ module.exports = function(webpackEnv) {
       ],
     },
     plugins: [
+      // use dayjs
+      new AntdDayjsWebpackPlugin(),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
