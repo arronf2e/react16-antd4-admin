@@ -2,20 +2,25 @@ import React from 'react'
 import { Layout } from 'antd'
 import SiderMenu from './SiderMenu'
 import MainHeader from './MainHeader'
+import styled from 'styled-components'
 
+const Content = styled(Layout.Content)`
+  background-color: #FFF;
+  padding: 10px;
+`
 
 
 const BasicLayout = ({ route, children }) => {
   return (
-    <Layout className="main-layout">
+    <Layout>
       <SiderMenu routes={route.childRoutes} />
       {/* 左侧菜单导航 */}
-      <Layout className="main-layout-right">
+      <Layout>
         <MainHeader />
-        <Layout.Content className="main-layout-content">
+        <Content>
           {children}
           {/* <MainFooter></MainFooter> */}
-        </Layout.Content>
+        </Content>
       </Layout>
     </Layout>
   )

@@ -19,7 +19,7 @@ const config = [
 				childRoutes: [
 					{
 						path: '/welcome',
-						name: '欢迎页',
+						name: 'DashBoard',
 						icon: 'smile',
 						component: lazy(() => import('../pages/Home')),
 					},
@@ -28,9 +28,20 @@ const config = [
             name: 'home主页',
             icon: 'home',
             component: lazy(() => import('../pages/Home')),
-          },
+					},
+					{
+						path: '/exception',
+						childRoutes: [
+							{
+								path: '/exception/404',
+								component: lazy(() => import('../pages/Exception/NotFound')),
+							}
+						]
+					}
 				]
-			}
+			},
+			{ path: '/', exact: true, redirect: '/welcome' },
+			{ path: '*', exact: true, redirect: '/exception/404' },
 		]
 	}
 ]
