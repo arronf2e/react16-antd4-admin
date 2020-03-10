@@ -1,20 +1,28 @@
-import React, { useEffect, useState, useMemo } from "react"
-import { Link, useLocation } from "react-router-dom"
-import { Layout, Menu, Row } from "antd"
-import Icon from '@ant-design/icons'
-import styled from 'styled-components'
+import React, { useEffect, useState, useMemo } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Layout, Menu, Row } from "antd";
+import Icon from "@ant-design/icons";
+import styled from "styled-components";
+import { getExpandState, setExpandState } from "@/utils/menuState";
 
-const Logo = styled.div`
-  height: 46px
-`
+const LogoLink = styled(Link)`
+  height: 50px;
+  color: #FFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const renderMenuItem = target => {
-	return target
-		.filter(item => item.path && item.name)
-		.map(subMenu => {
-			if(subMenu.childRoutes && !!subMenu.childRoutes.find(child => child.path && child.name)) {
-				return (
-					<Menu.SubMenu
+  return target
+    .filter(item => item.path && item.name)
+    .map(subMenu => {
+      if (
+        subMenu.childRoutes &&
+        !!subMenu.childRoutes.find(child => child.path && child.name)
+      ) {
+        return (
+          <Menu.SubMenu
             key={subMenu.path}
             title={
               <div>
@@ -25,10 +33,10 @@ const renderMenuItem = target => {
           >
             {renderMenuItem(subMenu.childRoutes)}
           </Menu.SubMenu>
-				)
-			}
-			return (
-				<Menu.Item key={subMenu.path}>
+        );
+      }
+      return (
+        <Menu.Item key={subMenu.path}>
           <Link to={subMenu.path}>
             <span>
               {subMenu.icon && <Icon type={subMenu.icon} />}
@@ -36,37 +44,38 @@ const renderMenuItem = target => {
             </span>
           </Link>
         </Menu.Item>
-			)
-		})
-}
+      );
+    });
+};
 
 const SiderMenu = ({ routes }) => {
-	const { pathname } = useLocation()
-	const [openKeys, setOpenKeys] = useState([])
+  const { pathname } = useLocation();
+  const [openKeys, setOpenKeys] = useState([]);
 
-	useEffect(() => {
-		const list = pathname.split('/').splice(1)
-    setOpenKeys(list.map((item, index) => `/${list.slice(0, index + 1).join('/')}`))
-	}, [])
+  useEffect(() => {
+    const list = pathname.split("/").splice(1);
+    setOpenKeys(
+      list.map((item, index) => `/${list.slice(0, index + 1).join("/")}`)
+    );
+  }, []);
 
-	const getSelectedKeys = useMemo(() => {
-    const list = pathname.split('/').splice(1)
-    return list.map((item, index) => `/${list.slice(0, index + 1).join('/')}`)
-  }, [pathname])
+  const getSelectedKeys = useMemo(() => {
+    const list = pathname.split("/").splice(1);
+    return list.map((item, index) => `/${list.slice(0, index + 1).join("/")}`);
+  }, [pathname]);
 
   const onOpenChange = keys => {
     setOpenKeys(keys);
-	}
-	
-	return (
-		<Layout.Sider
-			trigger={null}
-			collapsible>
-				<Logo />
+  };
+
+  return (
+    <Layout.Sider trigger={null} collapsible collapsed={getExpandState()}>
+      <LogoLink to="/">
         <Row type="flex" align="middle" className="main-logo">
-          <Icon type="car" style={{ color: '#13e367' }} />
+          111 logo
         </Row>
-			<Menu
+      </LogoLink>
+      <Menu
         mode="inline"
         theme="dark"
         style={{ paddingLeft: 0, marginBottom: 0 }}
@@ -77,8 +86,8 @@ const SiderMenu = ({ routes }) => {
       >
         {renderMenuItem(routes)}
       </Menu>
-		</Layout.Sider>
-	)
-}
+    </Layout.Sider>
+  );
+};
 
-export default SiderMenu
+export default SiderMenu;

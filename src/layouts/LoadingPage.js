@@ -1,8 +1,6 @@
-import React from 'react'
+import React from "react";
 const LoadingPage = () => {
-	return (
-		<>Loading...</>
-	)
-}
+  return <>Loading...</>;
+};
 
-export default LoadingPage
+export default LoadingPage;

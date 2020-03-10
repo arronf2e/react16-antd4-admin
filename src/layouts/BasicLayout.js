@@ -1,14 +1,13 @@
-import React from 'react'
-import { Layout } from 'antd'
-import SiderMenu from './SiderMenu'
-import MainHeader from './MainHeader'
-import styled from 'styled-components'
+import React from "react";
+import { Layout } from "antd";
+import SiderMenu from "./SiderMenu";
+import MainHeader from "./MainHeader";
+import styled from "styled-components";
 
 const Content = styled(Layout.Content)`
-  background-color: #FFF;
+  background-color: #fff;
   padding: 10px;
-`
-
+`;
 
 const BasicLayout = ({ route, children }) => {
   return (
@@ -23,8 +22,7 @@ const BasicLayout = ({ route, children }) => {
         </Content>
       </Layout>
     </Layout>
-  )
-}
-  
-  export default BasicLayout
-  
+  );
+};
+
+export default BasicLayout;
