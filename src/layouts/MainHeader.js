@@ -25,6 +25,7 @@ const HeaderRow = styled(Row)`
 
 const HeaderCol = styled(Col)`
   height: 100%;
+  flex: 1;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -33,16 +34,17 @@ const HeaderCol = styled(Col)`
 const ExtandIcon = styled(MenuFoldOutlined)`
   font-size: 18px;
   color: #FFF;
+  cursor: pointer;
 `
 
 const MainHeader = () => {
   return (
     <Layout.Header>
       <HeaderRow type="flex">
-        <HeaderCol style={{ flex: 1 }}>
+        <HeaderCol>
           <ExtandIcon />
         </HeaderCol>
-        <HeaderCol>
+        <HeaderCol style={{justifyContent: 'flex-end'}}>
           <Dropdown
             overlay={menu}
             trigger={["click", "hover"]}
